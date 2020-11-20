@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\admin;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,16 +15,14 @@ use App\Http\Controllers\admin;
 |
 */
 
-Route::get('/', function () {
-    // return view('welcome');
-    return redirect(url('login'));
-});
+
+Route::get('/')->middleware('auth');
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/admin', [admin::class, 'index']);
-Route::get('/admin/gallery_category', [admin::class, 'galleryCategory']);
-Route::post('/admin/add_new_category', [admin::class, 'addNewCategory']);
-Route::get('/admin/delete_category', [admin::class, 'deleteCategory']);
-Route::post('/admin/edit_category', [admin::class, 'editCategory']);
+Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/admin/gallery_category', [AdminController::class, 'galleryCategory']);
+Route::post('/admin/add_new_category', [AdminController::class, 'addNewCategory']);
+Route::get('/admin/delete_category', [AdminController::class, 'deleteCategory']);
+Route::post('/admin/edit_category', [AdminController::class, 'editCategory']);

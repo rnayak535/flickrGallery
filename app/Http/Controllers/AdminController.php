@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\app_category;
+use App\Models\AppCategory;
 use Validator;
 
-class admin extends Controller
+class AdminController extends Controller
 {
     public function __construct(){
         $this->middleware('auth');
@@ -14,13 +14,13 @@ class admin extends Controller
 
    public function index(){
         $data=array();
-        $data["category"] = app_category::orderBy('id','ASC')->get()->toArray();
+        $data["category"] = AppCategory::orderBy('id','ASC')->get()->toArray();
         return view('admin.dashboard', $data);
    }
 
    public function galleryCategory(){
         $data=array();
-        $data["category"] = app_category::orderBy('id','ASC')->get()->toArray();
+        $data["category"] = AppCategory::orderBy('id','ASC')->get()->toArray();
         return view('admin.galleryCategory', $data);
    }
 
@@ -28,7 +28,7 @@ class admin extends Controller
     
     $validator = Validator::make($request->all(), ['name'=>'required']);
         if($validator->passes()){
-            $oCategory = new app_category();
+            $oCategory = new AppCategory();
             $oCategory->name = $request->name;
             $oCategory->status = '1';
             $oCategory->save();
@@ -41,7 +41,7 @@ class admin extends Controller
    }
 
    public function deleteCategory(Request $request){
-       $category = app_category::where('id',$request->categoryId)->get()->first();
+       $category = AppCategory::where('id',$request->categoryId)->get()->first();
        $category->delete();
        $array = array('status'=>'true', 'message'=>'Category Deleted Successfully', 'reloadUrl'=>url('admin/gallery_category'));
        echo json_encode($array);
@@ -52,7 +52,7 @@ class admin extends Controller
         $validator = Validator::make($request->all(), ['name'=>'required']);
 
         if($validator->passes()){
-            $oCategory = app_category::where('id',$request->EditcategoryId)->get()->first();
+            $oCategory = AppCategory::where('id',$request->EditcategoryId)->get()->first();
             $oCategory->name = $request->name;
             $oCategory->update();
             $array = array('status'=>'true', 'message'=>'Category Updated successfully', 'reloadUrl'=>url('admin/gallery_category'));

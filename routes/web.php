@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +22,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/admin', [App\Http\Controllers\admin::class, 'index']);
-Route::get('/admin/gallery_category', [App\Http\Controllers\admin::class, 'galleryCategory']);
-Route::post('/admin/add_new_category', [App\Http\Controllers\admin::class, 'addNewCategory']);
-Route::get('/admin/delete_category', [App\Http\Controllers\admin::class, 'deleteCategory']);
-Route::post('/admin/edit_category', [App\Http\Controllers\admin::class, 'editCategory']);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/admin', [admin::class, 'index']);
+Route::get('/admin/gallery_category', [admin::class, 'galleryCategory']);
+Route::post('/admin/add_new_category', [admin::class, 'addNewCategory']);
+Route::get('/admin/delete_category', [admin::class, 'deleteCategory']);
+Route::post('/admin/edit_category', [admin::class, 'editCategory']);

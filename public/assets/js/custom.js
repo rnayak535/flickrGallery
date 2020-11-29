@@ -1,5 +1,5 @@
 
-// Duyanmic form submit 
+// Dyanmic form submit 
 $(document).on('submit', '.ajax_form_submit', function(event){
   var form = this;
   event.preventDefault();
